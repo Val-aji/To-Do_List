@@ -2,7 +2,7 @@
 
  
 let arr = ["NOUVAL AJI SATRIO", "ARDI AHMAD SIREGAR", "NANDA RAMADHAN", "SANDHIKA PRATAMA GALIH"];
-let arrUmur = [];
+let arrUmur = [18, 21, 24, 18, 20];
  
  // display none
  function tambahData() {
@@ -72,14 +72,21 @@ let arrUmur = [];
     // FITUR CEKLIS TAMBAH
 function ceklisTambah() {
    let namaLengkap = document.getElementById("namaLengkap");
-      if(namaLengkap.classList.contains("gagal") === true)
-      {
-         return alert("Maaf nama sudah ada");
-      }
-      
+   
    let inputUmur = document.querySelector(".inputUmur");
+   
+   if(namaLengkap.classList.contains("gagal") === true)
+      {
+         return alert("MAAF, NAMA SUDAH ADA");
+         
+      }
+     
    if(inputUmur.value.length === 0) {
       return alert("Maaf anda tidak memasukkan umur");
+   }
+   
+   if(inputUmur.value > 100 || inputUmur.value < 1) {
+      return alert("Maaf, umur tidak boleh kurang dari 1 dan tidak boleh lebih dari 100");
    }
    
         
@@ -96,19 +103,13 @@ function ceklisTambah() {
          tambahElement();
       }
       
-      
-      
-     
-      
   } // AKHIR FUNCTION CEKLIS TAMBAH
  
          
-         
    // LOGIKA CEK USERNAME
-   let namaLengkap = document.getElementById("namaLengkap");
+let namaLengkap = document.getElementById("namaLengkap");
      
-   namaLengkap.addEventListener("keyup", function() {
-         
+namaLengkap.addEventListener("keyup", () => {
       let cekNama = document.querySelector(".cekNama");
        
       for(let j = 0; j < arr.length; j++ ) {
@@ -116,12 +117,12 @@ function ceklisTambah() {
             cekNama.classList.remove("text-info");
             cekNama.classList.add("text-danger");
             cekNama.innerHTML = "Nama sudah ada ×";
-            cekNama.classList.add("gagal");
+            namaLengkap.classList.add("gagal");
             break;
           } else if (namaLengkap.value.length === 0)  {
             cekNama.innerHTML = "";
           } else {
-            cekNama.classList.remove("gagal");
+            namaLengkap.classList.remove("gagal");
             cekNama.classList.remove("text-danger");
             cekNama.classList.add("text-info");
                
@@ -138,19 +139,25 @@ function ceklisTambah() {
 
 let list = document.querySelector("#identitasKandidat").children;
       
-   function hapusData() {
-      for(let i = 0; i < list.length; i++) {
-         let tombol = list[i].children[0];
-         tombol.classList.toggle("d-none");
-      }
+function hapusData() {
+  for(let i = 0; i < list.length; i++) {
+      let tombol = list[i].children[0];
+        tombol.classList.toggle("d-none");
+    }
          
-   };
+ };
       // AKHIR TOMBOL HAPUS DATA
       
 function hapusList(x) {
    let list = document.querySelector(x);
+   let teks = "Apakah anda yakin ingin menghapus ";
+   teks += list.children[1].textContent.toString();
+   teks += " ? ";
+   let konfirm = confirm(teks);
+   if(konfirm === true) {
       list.remove();
    }
+}
       
-       // AKHIR HAPUS LIST
+  // AKHIR HAPUS LIST
     
